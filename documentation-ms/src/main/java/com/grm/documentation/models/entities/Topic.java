@@ -27,7 +27,7 @@ public class Topic {
     private Category category;
 
     @OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Block> blocks;
+    private List<Block> block;
 
     public Long getId() {
         return id;
@@ -78,10 +78,10 @@ public class Topic {
     }
 
     public List<Block> getBlocks() {
-        return blocks;
+        return block;
     }
 
-    public void setBlocks(List<Block> blocks) {
-        this.blocks = blocks;
+    public void setBlocks(List<Block> block) {
+        this.block = block;
     }
 }

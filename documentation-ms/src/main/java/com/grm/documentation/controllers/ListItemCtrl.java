@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
-//@CrossOrigin(origins = "https://grm.whocky.com")
+@CrossOrigin("https://grm.whocky.com")
 @RestController
-@RequestMapping("documentation/listitems")
+@RequestMapping("documentation/list-items")
 public class ListItemCtrl {
     private static final Logger LOGGER = LoggerFactory.getLogger(ListItemCtrl.class);
     private final ListItemService listItemService;

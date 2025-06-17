@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
-//@CrossOrigin(origins = "https://grm.whocky.com")
+@CrossOrigin("https://grm.whocky.com")
 @RestController
 @RequestMapping("documentation/tables")
 public class TableEntityCtrl {

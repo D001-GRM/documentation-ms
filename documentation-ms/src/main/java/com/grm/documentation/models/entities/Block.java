@@ -2,6 +2,8 @@ package com.grm.documentation.models.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Block {
 
@@ -9,18 +11,23 @@ public class Block {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+
+    @Column(nullable = false)
+    private String style;
+
     @Column(nullable = false)
     private int position;
-
-    @Column(nullable = false)
-    private String type;
-
-    @Column(nullable = false)
-    private Long referenceId;
 
     @ManyToOne
     @JoinColumn(name = "topic_id", nullable = false)
     private Topic topic;
+
+    @OneToMany(mappedBy = "block", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BlockSimple> simpleBlocks;
+
+    @OneToMany(mappedBy = "block", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BlockFill> fillBlocks;
 
     public Long getId() {
         return id;
@@ -30,28 +37,28 @@ public class Block {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
+
     public int getPosition() {
         return position;
     }
 
     public void setPosition(int position) {
         this.position = position;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Long getReferenceId() {
-        return referenceId;
-    }
-
-    public void setReferenceId(Long referenceId) {
-        this.referenceId = referenceId;
     }
 
     public Topic getTopic() {

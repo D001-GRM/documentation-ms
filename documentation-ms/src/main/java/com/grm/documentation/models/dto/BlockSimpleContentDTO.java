@@ -1,12 +1,12 @@
 package com.grm.documentation.models.dto;
 
-public class BlockContentDTO {
+public class BlockSimpleContentDTO {
 
     private Long id;
     private String type;
     private Object content;
 
-    public BlockContentDTO(Long id, String type, Object content) {
+    public BlockSimpleContentDTO(Long id, String type, Object content) {
         this.id = id;
         this.type = type;
         this.content = content;
