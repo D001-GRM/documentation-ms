@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("https://grm.whocky.com")
+//@CrossOrigin("https://grm.whocky.com")
 @RestController
 @RequestMapping("documentation/list-items")
 public class ListItemCtrl {

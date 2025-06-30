@@ -65,38 +65,6 @@ public class BlockSimpleService implements IBlockSimpleService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<BlockTitleDTO> getBlockTitles(Long topicId) {
-        List<BlockSimple> blockSimples = blockSimpleRepository.findBlockByBlockIdOrderByPositionAsc(topicId);
-        List<BlockTitleDTO> titles = new ArrayList<>();
-
-        for (BlockSimple blockSimple : blockSimples) {
-            String type = blockSimple.getType();
-            Long refId = blockSimple.getReferenceId();
-
-            String title = switch (type) {
-                case "paragraph" -> paragraphRepository.findById(refId)
-                        .map(Paragraph::getTitle).orElse(null);
-                case "note" -> noteRepository.findById(refId)
-                        .map(Note::getTitle).orElse(null);
-                case "list" -> listRepository.findById(refId)
-                        .map(com.grm.documentation.models.entities.List::getTitle).orElse(null);
-                case "table" -> tableEntityRepository.findById(refId)
-                        .map(TableEntity::getTitle).orElse(null);
-                case "code" -> codeRepository.findById(refId)
-                        .map(Code::getTitle).orElse(null);
-                default -> null;
-            };
-
-            if (title != null && !title.isBlank()) {
-                titles.add(new BlockTitleDTO(refId, type, title));
-            }
-        }
-
-        return titles;
-    }
-
-    @Override
-    @Transactional(readOnly = true)
     public List<BlockSimpleContentDTO> findBlockByBlockIdOrderByPositionAsc(Long topicId) {
         List<BlockSimple> blockSimples = blockSimpleRepository.findBlockByBlockIdOrderByPositionAsc(topicId);
         List<BlockSimpleContentDTO> result = new ArrayList<>();

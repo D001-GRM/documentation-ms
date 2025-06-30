@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("https://grm.whocky.com")
+//@CrossOrigin("https://grm.whocky.com")
 @RestController
 @RequestMapping("/documentation/blocks")
 public class BlockCtrl {
@@ -36,19 +36,20 @@ public class BlockCtrl {
         this.blockService = blockService;
     }
 
-    @GetMapping("/{topicId}/titles")
-    @ResponseStatus(HttpStatus.OK)
-    public List<BlockTitleDTO> getBlockTitles(@PathVariable Long topicId) {
-        LOGGER.info("getBlockTitles");
-        return blockSimpleService.getBlockTitles(topicId);
-    }
-
     @GetMapping("/{topicId}")
     @ResponseStatus(HttpStatus.OK)
 
     public List<BlockBasicDTO> findByTopicIdOrderByPositionAsc(@PathVariable Long topicId) {
         LOGGER.info("findByTopicIdOrderByPositionAsc");
         return blockService.findByTopicIdOrderByPositionAsc(topicId);
+    }
+
+    @GetMapping("{topicId}/titles")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<BlockTitleDTO>> findTitlesSimpleByTopicIdOrderByPositionAsc(@PathVariable Long topicId) {
+        List<BlockTitleDTO> content = blockService.findTitlesSimpleByTopicIdOrderByPositionAsc(topicId);
+        LOGGER.info("findTitlesSimpleByTopicIdOrderByPositionAsc");
+        return ResponseEntity.ok(content);
     }
 
     @GetMapping("{blockId}/content-simple")

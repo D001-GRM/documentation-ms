@@ -1,7 +1,6 @@
 package com.grm.documentation.services;
 
 import com.grm.documentation.models.dto.BlockSimpleContentDTO;
-import com.grm.documentation.models.dto.BlockTitleDTO;
 import com.grm.documentation.models.dto.ListBasicDTO;
 import com.grm.documentation.models.dto.TableBasicDTO;
 import com.grm.documentation.models.entities.*;
@@ -61,38 +60,6 @@ public class BlockFillService implements IBlockFillService {
     @Transactional
     public void deleteById(Long id) {
         blockFillRepository.deleteById(id);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<BlockTitleDTO> getBlockTitles(Long topicId) {
-        List<BlockFill> blockFills = blockFillRepository.findBlockByBlockIdOrderByPositionAsc(topicId);
-        List<BlockTitleDTO> titles = new ArrayList<>();
-
-        for (BlockFill blockFill : blockFills) {
-            String type = blockFill.getType();
-            Long refId = blockFill.getReferenceId();
-
-            String title = switch (type) {
-                case "paragraph" -> paragraphRepository.findById(refId)
-                        .map(Paragraph::getTitle).orElse(null);
-                case "note" -> noteRepository.findById(refId)
-                        .map(Note::getTitle).orElse(null);
-                case "list" -> listRepository.findById(refId)
-                        .map(com.grm.documentation.models.entities.List::getTitle).orElse(null);
-                case "table" -> tableEntityRepository.findById(refId)
-                        .map(TableEntity::getTitle).orElse(null);
-                case "code" -> codeRepository.findById(refId)
-                        .map(Code::getTitle).orElse(null);
-                default -> null;
-            };
-
-            if (title != null && !title.isBlank()) {
-                titles.add(new BlockTitleDTO(refId, type, title));
-            }
-        }
-
-        return titles;
     }
 
     @Override

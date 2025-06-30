@@ -1,6 +1,7 @@
 package com.grm.documentation.services;
 
 import com.grm.documentation.models.dto.BlockBasicDTO;
+import com.grm.documentation.models.dto.BlockTitleDTO;
 import com.grm.documentation.models.entities.Block;
 import com.grm.documentation.repositories.BlockRepository;
 import com.grm.documentation.services.interfaces.IBlockService;
@@ -19,7 +20,6 @@ public class BlockService implements IBlockService {
     public BlockService(BlockRepository blockRepository) {
         this.blockRepository = blockRepository;
     }
-
 
     @Override
     @Transactional(readOnly = true)
@@ -43,6 +43,11 @@ public class BlockService implements IBlockService {
     @Transactional
     public void deleteById(Long id) {
         blockRepository.deleteById(id);
+    }
+
+    @Override
+    public List<BlockTitleDTO> findTitlesSimpleByTopicIdOrderByPositionAsc(Long topicId) {
+        return blockRepository.findTitlesSimpleByTopicIdOrderByPositionAsc(topicId);
     }
 
     @Override

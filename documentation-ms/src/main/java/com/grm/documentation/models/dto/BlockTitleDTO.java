@@ -1,30 +1,12 @@
 package com.grm.documentation.models.dto;
 
 public class BlockTitleDTO {
-    private Long id;
-    private String type;
     private String title;
+    private int position;
 
-    public BlockTitleDTO(Long id, String type, String title) {
-        this.id = id;
-        this.type = type;
+    public BlockTitleDTO(String title, int position) {
         this.title = title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+        this.position = position;
     }
 
     public String getTitle() {
@@ -33,5 +15,13 @@ public class BlockTitleDTO {
 
     public  void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }
